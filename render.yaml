@@ -1,0 +1,14 @@
+services:
+  - type: worker
+    name: vote-bot
+    runtime: node
+    plan: starter
+    buildCommand: yarn install --immutable && yarn build
+    startCommand: yarn start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_FILE
+        value: /opt/render/project/src/data/db.json
+      - key: BOT_TOKEN
+        sync: false
