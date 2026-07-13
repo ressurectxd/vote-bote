@@ -90,6 +90,13 @@ cd /opt/vote-bot
 ./deploy/update.sh
 ```
 
+To install a global shortcut:
+
+```bash
+sudo ./deploy/install-update-command.sh
+vote-bot-update
+```
+
 Manual equivalent:
 
 ```bash

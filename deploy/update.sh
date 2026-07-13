@@ -1,7 +1,9 @@
 #!/usr/bin/env sh
 set -eu
 
-APP_DIR="${APP_DIR:-/opt/vote-bot}"
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+DEFAULT_APP_DIR="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)"
+APP_DIR="${APP_DIR:-$DEFAULT_APP_DIR}"
 PM2_NAME="${PM2_NAME:-vote-bot}"
 
 cd "$APP_DIR"

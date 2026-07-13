@@ -109,6 +109,13 @@ yarn install --immutable && yarn build
 
 Скрипт делает бэкап `data/db.json`, подтягивает `git pull --ff-only`, ставит зависимости, собирает `dist` и перезапускает `pm2`.
 
+Чтобы запускать обновление из любой папки короткой командой:
+
+```bash
+sudo ./deploy/install-update-command.sh
+vote-bot-update
+```
+
 Короткая схема:
 
 ```bash
