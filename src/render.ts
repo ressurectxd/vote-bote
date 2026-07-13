@@ -5,8 +5,6 @@ const BUTTON_TEXT_LIMIT = 56;
 const ALERT_TEXT_LIMIT = 190;
 const INLINE_QUESTION_LIMIT = 120;
 const INLINE_OPTION_TEXT_LIMIT = 32;
-const INLINE_VOTER_NAME_LIMIT = 14;
-const INLINE_VOTERS_PER_OPTION = 2;
 const TELEGRAM_MESSAGE_LIMIT = 3900;
 
 export function renderPollText(poll: Poll): string {
@@ -159,7 +157,7 @@ function renderCompactResultSections(poll: Poll): string[] {
       }
 
       const names = voters.length > 0
-        ? voters.map(renderLinkedVoter).join(", ")
+        ? voters.map((vote) => `- ${renderLinkedVoter(vote)}`).join("\n")
         : "<i>пока нет голосов</i>";
 
       return `${header}\n${names}`;
@@ -187,13 +185,7 @@ function renderLinkedVoter(vote: PollVote): string {
 }
 
 function renderInlineVoters(voters: PollVote[]): string {
-  const visible = voters.slice(0, INLINE_VOTERS_PER_OPTION).map((vote) => {
-    const label = vote.username ? `@${vote.username}` : compactName(vote.displayName, INLINE_VOTER_NAME_LIMIT);
-    return escapeHtml(label);
-  });
-  const hidden = voters.length - visible.length;
-
-  return hidden > 0 ? `${visible.join(", ")} +${hidden}` : visible.join(", ");
+  return voters.map((vote) => `- ${renderLinkedVoter(vote)}`).join("\n");
 }
 
 function compactName(value: string, limit = 24): string {
